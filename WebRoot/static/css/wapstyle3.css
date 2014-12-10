@@ -1,0 +1,33 @@
+body {
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+	background-color: #f3f9fb;
+}
+.t1 {
+	font-size: 14px;
+}
+.t2 {
+	font-size: 12px;
+	color: #333333;
+}
+.t3 {
+	font-size: 14px;
+	color: #FF0000;
+	line-height: 18px;
+}
+.t4 {
+	font-size: 12px;
+	color: #FF0000;
+}
+.t5 {
+	font-size: 12px;
+	line-height: 20px;
+	color: #666666;
+	padding: 4px;
+	margin: 4px;
+}
+t6 {
+	font-size: 14px;
+}

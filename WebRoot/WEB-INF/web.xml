@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.4" xmlns="http://java.sun.com/xml/ns/j2ee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee 
+	http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd">
+	
+	 <display-name>hfWeb</display-name>
+    <!-- Context Configuration locations for Spring XML files -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>hfWebKey</param-value>
+    </context-param>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+           classpath:ctx/ctx-*.xml
+        </param-value>
+    </context-param>
+    <context-param>   
+    <!--
+		 <param-name>log4jConfigLocation</param-name>   
+		 <param-value>/WEB-INF/classes/log4j.properties</param-value>
+		  -->
+		 <param-name>logbackConfigLocation</param-name>   
+		 <param-value>WEB-INF/classes/logback.xml</param-value>
+    </context-param>
+    <!-- 
+    <context-param>
+        <param-name>log4jRefreshInterval</param-name>
+        <param-value>60000</param-value>
+    </context-param>
+     -->
+    <listener>
+      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>   
+      <listener-class>com.umpay.hfweb.util.LogbackConfigListener</listener-class>
+    </listener> 
+    
+    <filter> 
+        <filter-name>remoteFilter</filter-name> 
+        <filter-class>com.umpay.hfweb.filter.RequestRemoteAddrFilter</filter-class> 
+        <init-param> 
+            <param-name>IS_NGINX</param-name> 
+            <param-value>true</param-value> 
+        </init-param>
+        <init-param> 
+            <param-name>NGINX_IP</param-name> 
+            <param-value>X-Real-IP</param-value> 
+        </init-param>
+    </filter>
+    
+    <filter> 
+        <filter-name>encodingFilter</filter-name> 
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+        <init-param> 
+            <param-name>encoding</param-name> 
+            <param-value>UTF-8</param-value> 
+        </init-param> 
+        <init-param> 
+            <param-name>forceEncoding</param-name> 
+            <param-value>true</param-value> 
+        </init-param> 
+    </filter> 
+    
+   <filter> 
+        <filter-name>encodingGBKFilter</filter-name> 
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class> 
+        <init-param> 
+            <param-name>encoding</param-name> 
+            <param-value>GBK</param-value> 
+        </init-param> 
+        <init-param> 
+            <param-name>forceEncoding</param-name> 
+            <param-value>true</param-value> 
+        </init-param> 
+    </filter> 
+    
+    <filter-mapping> 
+        <filter-name>remoteFilter</filter-name> 
+        <url-pattern>*.dl</url-pattern> 
+    </filter-mapping>
+    <filter-mapping> 
+        <filter-name>remoteFilter</filter-name> 
+        <url-pattern>*.do</url-pattern> 
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name> 
+        <url-pattern>*.dl</url-pattern> 
+    </filter-mapping> 
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name> 
+        <url-pattern>*.do</url-pattern> 
+    </filter-mapping> 
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name> 
+        <url-pattern>*.jsp</url-pattern> 
+    </filter-mapping> 
+    
+    <filter-mapping>
+        <filter-name>encodingGBKFilter</filter-name> 
+        <url-pattern>/sms/push.do</url-pattern> 
+    </filter-mapping>
+    
+    <filter-mapping>
+        <filter-name>encodingGBKFilter</filter-name> 
+        <url-pattern>/pay2/mwper.do</url-pattern> 
+    </filter-mapping>  
+    
+    <filter-mapping>
+        <filter-name>encodingGBKFilter</filter-name> 
+        <url-pattern>/pay2/month.do</url-pattern> 
+    </filter-mapping> 
+    
+    <filter-mapping>
+        <filter-name>encodingGBKFilter</filter-name> 
+        <url-pattern>/pay2/xeper.do</url-pattern> 
+    </filter-mapping> 
+    
+    <servlet>
+        <servlet-name>action</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>classpath:ctx/url-mapping.xml</param-value>
+		</init-param>
+        <load-on-startup>2</load-on-startup>
+    </servlet>
+    
+    <servlet>
+        <servlet-name>jcaptcha</servlet-name>
+        <servlet-class>com.umpay.hfweb.servlet.ImageCaptchaServlet</servlet-class>
+        <load-on-startup>0</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>sms_init</servlet-name>
+        <servlet-class>com.umpay.hfweb.servlet.SmsInitServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>alarm_init</servlet-name>
+        <servlet-class>com.umpay.hfweb.servlet.AlarmInitServlet</servlet-class>
+        <load-on-startup>3</load-on-startup>
+    </servlet>
+    
+
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.dl</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>action</servlet-name>
+        <url-pattern>*.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>jcaptcha</servlet-name>
+        <url-pattern>/jcaptcha</url-pattern>
+    </servlet-mapping>
+
+</web-app>

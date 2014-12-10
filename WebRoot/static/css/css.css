@@ -1,0 +1,49 @@
+/* CSS */
+
+*{margin:0;padding:0;}
+
+img{border:0;}
+
+ul,li{list-style:none;}
+
+a {color:#0078FF;text-decoration:underline;}
+a:hover{color:#5BA8FF;text-decoration:underline;}
+
+.cl{height:1px;clear:left;}
+
+.blu{color:#0078FF;}
+
+.red{color:#F70101;}
+.red a {color:#F70101;text-decoration:none;}
+.red a:hover{color:#F70101;text-decoration:underline;}
+
+.blu2{color:#005CB9;}
+
+.blk14{font-size:14px;font-weight:bold;color:#000;}
+
+body {margin:0 auto;font-family:宋体,Arial, Helvetica, sans-serif;font-size:12px;line-height:20px;color:#3F3F3F;background:#fff;}
+
+.cz_bg{margin:0 auto;width:636px;height:452px;padding:1px;background:#fff;position:relative;}
+
+.cz3{width:623px;background:#D0E8FF;padding-top:1px;text-align:right;padding-right:13px;height:22px;}
+.cz3 a{color:#3F3F3F;text-decoration:underline;}
+.cz3 a:hover{color:#737373;text-decoration:underline;}
+
+/**新增样式**/
+.head{height:48px;background:url(../images/jinshan/jinshan.jpg) no-repeat;color:#D4E2F2;padding:15px 0 0 424px}
+.czmain{height:343px;border-bottom:1px solid #ccc;padding:23px 0 0 50px;}
+.czm{width:499px;height:319px;padding-left:45px;color:#000;position:relative}
+
+.yd{background:url(../images/jinshan/n04.jpg) no-repeat}
+.czm1{padding-top:34px;height:38px;font-size:14px;color:#333}
+.czm2{padding-bottom:12px}
+.czm3{padding:0 0 18px 60px;font-size:14px;_padding-top:1px;width:383px}
+.czm4{padding-top:46px;height:128px;font-size:14px;line-height:24px}
+
+
+.gry{color:#666}
+.gry a {color:#666;text-decoration:underline;}
+.gry a:hover{color:#5BA8FF;text-decoration:underline;}
+.gry1{color:#999}
+
+.ydlogo{position:absolute;top:271px;left:423px;background:url(../images/jinshan/n03.gif) no-repeat;width:90px;height:36px}

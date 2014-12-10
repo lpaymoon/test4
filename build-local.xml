@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+
+<project name="hfWebBusi-Local" basedir="." default="war-front">
+
+	<property name="name" value="hfWebBusi" />
+	<property name="war.dir" value="WebRoot" />
+	<property name="src.web.dir" value="src/web" />
+	<property name="src.core.dir" value="src/core" />
+	<property name="src.config.dir" value="src/config" />
+	<!--<property name="dist.dir" value=".build" />-->
+	<property name="dist.dir" value="D:/mobile/deploy/hfWebBusi" />
+	<property name="webclasses.dir" value="${dist.dir}/WEB-INF/classes" />
+
+	<property name="lib.source" value="${war.dir}/WEB-INF/lib" />
+	
+
+	<path id="build-classpath">
+		<fileset dir="${lib.source}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+ 
+    	    	
+	<target name="clean-front" description="Clean output dirs (build,  weblib, dist)">
+		<delete dir="${webclasses.dir}" />
+		<delete dir="${dist.dir}" />
+	</target>
+	
+
+	<target name="build-web"  depends="clean-front" description="Compile main source tree java files into class files, generate jar files">
+
+		<mkdir dir="${webclasses.dir}" />
+		<!-- java file-->
+		<javac destdir="${webclasses.dir}" source="1.5" target="1.5" debug="true" deprecation="false" optimize="false" failonerror="true" verbose="false" includeantruntime="false">
+			<compilerarg value="-Xlint:unchecked" />
+			<compilerarg line="-encoding utf-8 " />
+			<src path="${src.core.dir}" />
+			<src path="${src.web.dir}" />
+			<!--<src path="${src.config.dir}" />-->
+			<classpath refid="build-classpath" />
+			<exclude name="**/SVN/*" />
+			<exclude name="**/test/**" />
+		</javac>
+		
+		<!-- config xml property -->
+		<copy todir="${webclasses.dir}" preservelastmodified="true">
+			<fileset dir="${src.config.dir}">
+				<include name="**/**" />
+				<exclude name="**/SVN/*" />
+				<exclude name="**/log4j.properties" />
+				<exclude name="**/sysconf.properties" />
+			</fileset>
+		</copy>
+
+	</target>
+
+	<target name="war-front" depends="clean-front,build-web" description="Build the web application archive">
+
+		<mkdir dir="${dist.dir}" />
+		<copy todir="${dist.dir}" preservelastmodified="true">
+			<fileset dir="${war.dir}">
+				<include name="**/**" />
+				<exclude name="**/SVN/*" />
+				<exclude name="**/classes/**" />
+				<!--<exclude name="**/*.jar" /> -->
+				
+				<exclude name="**/spring.test.jar" />
+			</fileset>
+		</copy>
+	</target>
+
+</project>

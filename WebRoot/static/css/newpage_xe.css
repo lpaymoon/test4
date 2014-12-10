@@ -1,0 +1,103 @@
+@charset "utf-8";
+/* CSS Document */
+body{ margin:0px auto; padding:0px; background-color:#ffffff; font-size:12px; font-family:"Arial", Gadget, sans-serif}
+.clr{ clear:both;}
+a{ text-decoration:none;} 
+em{ font-style:normal;}
+.red_cor{ color:#e40078;}
+
+
+
+.contain{ width:980px; height: auto;  margin:0px auto; padding:0px; }
+.top_logo{ width:980px; height:63px; border-bottom:4px solid #004098; float:left; margin:15px 0px 0px 0px;}
+.yd_tip{ width:968px; height:40px; font-size:14px; color:#363636; line-height:40px; margin:0px 0px 0px 12px; text-align:left;}
+
+
+.nr_cnt{ width:980px; height:auto; margin:0px auto; padding:0px;}
+.cnt_left{ width:281px; height:325px; background:url(../images/newpage_2014/left_bg.png) no-repeat left top; font-size:12px; float:left; margin:0px 0px 0px 12px; padding:0px; color:#505050; display:inline; }
+.cnt_left span{ font-weight:800; }
+.dd_title{ font-size:16px; color:#2e79ae; font-weight:800; text-align: center; margin:25px 0px 0px 0px;}
+.cnt_left dt{ margin:15px 0px 0px 45px; padding:0px; }
+
+
+.ctn_nr_right{ width:300px;    float:left; margin:12px 0px 0px 20px; padding:0px; border-left:1px solid #d9d9d9;}
+
+.zfwc_btn_index{width:210px; height:35px; line-height:35px; margin: 10px 0px 0px 42px; padding:0px; background-color:#56b1c5; border: none; color:#ffffff; font-size:14px; font-weight:800; cursor:pointer; display: inline-block; text-align:center; }
+.zfwc_btn_index:hover{ background-color:#399fb5;}
+.right_down_sty{ margin:0px 0px 0px 20px;}
+.down_sty a{ font-size:14px; color:#177ec6; text-decoration:underline; margin:0px 5px 0px 5px;}
+.down_sty a:hover{  color:#a95b31; }
+
+.ctn_nr{ width:642px; height:288px; border:1px solid #e8e8e8; margin:0px auto; padding:0px; }
+
+
+.cnt_right{ width:656px; height:325px; float:right; background:url(../images/newpage_2014/right_zf.png) no-repeat left top; margin:0px 12px 0px 0px; padding:0px; overflow:hidden;}
+.tab_name{ width:50%; height:35px; line-height:35px; margin:0px 0px 0px 37px; font-size:14px; font-weight:800; color:#5e5e5e;}
+.ctn_nr_left{ width:308px; height:220px;  margin:35px 0px 0px 0px; padding:0px;  float:left;  }
+.ctn_nr_left dt{ margin:20px 0px 0px 0px; width:320px; padding:0px; height:35px;  }
+.tel_ipt input{ width:210px; height:28px; border:1px solid #cfcfcf; line-height:28px;}
+.yzm_ipt{ width:125px; height:28px; border:1px solid #cfcfcf; line-height:28px;}
+
+.yzm_img{ float:left; margin:0px 10px 0px 10px;}
+.ctn_nr_left span{ width:82px;height:28px;line-height:28px; display: inline-block; text-align:right; float:left;}
+.zs_font{  color:#949494; float:left; margin:0px 0px 0px 80px; padding:0px; }
+
+.qrzf_btn{ width:210px; height:35px; line-height:35px; margin:2px 0px 0px 83px; padding:0px; background-color:#d82a36; border: none; color:#ffffff; font-size:14px; font-weight:800; cursor:pointer; display: inline-block; *+margin:5px 0px 0px 83px;}
+.qrzf_btn:hover{  background-color:#ea2431;}
+
+.qrzf_btn_sec{ width:210px; height:35px; line-height:35px; margin:16px 0px 0px 83px; padding:0px; background-color:#e30076; border: none; color:#ffffff; font-size:14px; font-weight:800; cursor:pointer; display: inline-block; *+margin:5px 0px 0px 83px;}
+.qrzf_btn_sec:hover{  background-color:#ef1186;}
+
+
+
+.bmt_ctn{ width:961px; height:120px; background:url(../images/newpage_2014/btm_img.jpg) no-repeat; margin:0px auto; padding:40px 0px 0px 0px; text-align:center; color:#727272; }
+.bmt_ctn a{ color:#727272;}
+.bmt_ctn dt{ margin:0px 0px 6px 0px; padding:0px;}
+.bmt_ctn span{ width:15px; display: inline-block; text-align:center;}
+
+.wenxin_tip{ width:945px; height:auto; margin:0px auto; padding:0px 0px 0px 10px; color:#727272;}
+.wenxin_tip dt{ margin:0px 0px 7px 0px; padding:0px;}
+.tip_title{ border-bottom:1px solid #e8e8e8; height:25px; line-height:25px; width:100%; }
+/*--------------------------------------购买信息页----------------------------------------*/
+.cnt_right2{ width:656px; height:280px; float:right; margin:0px 12px 0px 0px;  padding:0px; overflow:hidden;}
+.right_title{ width:100%; height:40px; line-height:40px; font-size:14px; }
+.tip_ctn{ width:562px; height:auto; margin:0px auto; padding:0px;}
+.tip_ctn p{ margin:5px 0px 0px 24px;}
+.tip_ctn_txt{ width:656px; height:auto;  margin:0px 0px 0px 300px; padding:0px; }
+.tip_ctn_txt2{ width:656px; height:50px;  margin:20px 0px 0px 0px; padding:0px; }
+.js_btn{ color:#e40078; text-decoration:underline; font-weight:800; margin:0px 0px 0px 5px; padding:0px;}
+.zfwc_btn{ width:135px; height:35px; line-height:35px; color:#ffffff; font-size:14px; background-color:#0087d1; margin:0px auto; padding:0px; text-align:center; display:block;  cursor:pointer;}
+.zfwc_btn:hover{ background-color:#17a9ca;}
+.btm_tip{ width:590px; height:38px; border:1px solid #dfdfdf; margin:30px 0px 0px 0px;}
+.btm_tip span{ float:left; height:38px; line-height:38px; color:#797979;}
+
+.re_back{ color:#e40078; text-decoration:underline; margin-top:10px; padding:0px; display:block; text-align:center;}
+.re_back a{ color:red;}
+
+/*-------------------------------------获取商品页面-------------------------------------------*/
+.qh_styl{ width:100%; height:auto;}
+.qh_styl input{ width:220px; height:28px; line-height:28px;  border:1px solid #cfcfcf; background:#fff; color:#aeadad }
+.qh_zs{ width:450px; line-height:18px; margin:0px 0px 30px 0px; padding:0px;}
+.lq_btn{ font-size:14px; font-weight:800; color:#ffffff; padding:5px 20px 5px 20px; margin:0px 0px 0px 100px; background-color:#d82a36; display: inline-block;  cursor:pointer;}
+.lq_btn:hover{ background-color:#ea2431;}
+
+.btm_tip2{ width:590px; height:38px; border:1px solid #dfdfdf; margin:100px 0px 0px 0px;}
+.btm_tip2 span{ float:left; height:38px; line-height:38px; color:#797979;}
+
+
+/*------------------------------------交易成功页面-----------------------------------------------*/
+.suce_img{ margin:0px 0px 0px 180px; padding:0px; font-size:16px; color:#89b72c; font-weight:800;}
+.suce_txt{ color:#3f3f3f; line-height:18px; margin:10px 0px 0px 120px; padding:0px;}
+.suce_btn{ margin:30px 0px 0px 120px; padding:0px;}
+.suce_btn span{ margin:0px 0px 0px 16px; padding:0px; color:#a7a7a7}
+
+/*-------------------------------------交易失败页面----------------------------------------------*/
+.dis_img{ width:50%; height:52px; margin:0px 0px 0px 180px; padding:0px; font-size:16px; color:#ed684e; font-weight:800;}
+.dis_img span{ float:left; height:52px; line-height:52px; margin:10px 0px 0px 10px;}
+.dis_txt{ width:540px; color:#3f3f3f; line-height:18px; margin:10px 0px 0px 0px; padding:0px; text-align:center;}
+.dis_btn{ margin:30px 0px 0px 120px; padding:0px;}
+.dis_btn span{ margin:0px 0px 0px 16px; padding:0px; color:#a7a7a7}
+
+/*-------------------------------------广告显示----------------------------------------------*/
+img{ border:none;}
+.btm_gg{ margin:30px 0px 0px 120px; padding:0px; text-align:left; width:100%;}

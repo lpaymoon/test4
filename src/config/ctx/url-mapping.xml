@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+ 	<!--Request Mapping -->
+    <bean id="urlMapping" 
+        class="org.springframework.web.servlet.handler.SimpleUrlHandlerMapping">
+        <property name="mappings">
+            <props>
+            	<!-- 直连下单 Start -->
+	            <prop key="/pay/direct.do">directPayAction</prop>
+	            <prop key="/pay2/mwper.do">directPayPerV2Action</prop>
+	            <prop key="/pay2/month.do">directPayMonthV2Action</prop>
+	            <prop key="/pay2/xeper.do">directPayPerXEV2Action</prop>
+	             <prop key="/pay/hncpdirect.do">hncpPayAction</prop>
+	            <!-- 无线接入商户下单 -->
+	            <prop key="/pay/wxOrder.do">wxOrderAction</prop>
+	            <prop key="/pay/wxQueryOrder.do">wxQueryOrderAction</prop>
+	            <prop key="/pay/wxVersionUpdate.do">wxUpdateVersionAction</prop>
+	            <prop key="/pay/wxUser.do">wxUserAction</prop>
+	            <prop key="/pay/wxHforder.do">wxHfOrderAction</prop>
+	            <prop key="/pay/wxSms.do">wxSmsAction</prop>
+	            <prop key="/pay/wxSmsVerify.do">wxSmsVerifyAction</prop>
+	            <prop key="/pay/wxHistoryTrans.do">wxHistoryTransAction</prop>
+	            <prop key="/pay/wxSavePlatOrder.do">wxSavePlatOrderAction</prop>
+	            <prop key="/pay/wxQueryPlatOrder.do">wxQueryPlatOrderAction</prop>
+	            <prop key="/pay/wxUF.do">wxUfAction</prop>
+	            <prop key="/pay/wxUFNotify.do">wxUFNotifyAction</prop>
+	            <prop key="/pay/channelorder.do">chnlOrderAction</prop>
+	            <!-- 页面下单 Start -->
+	            <prop key="/pay/page2.do">pageReqNoMblAction</prop>
+	            <prop key="/pay/page.do">pageRequestAction</prop>
+	            <prop key="/pay/saveOrder.do">pageOrderAction</prop>
+	            <prop key="/pay/payResult.do">pagePayNotifyAction</prop>
+	            <prop key="/pay/sms.do">pageSmsNotifyAction</prop>
+              <prop key="/pay/qRCodePayResult.do">qRCodePayNotifyAction</prop>
+	            <prop key="/pay/wap.do">wapRequestAction</prop>
+	            <prop key="/pay/wapSaveOrder.do">wapOrderAction</prop>
+	            <prop key="/pay/wapPayResult.do">wapPayNotifyAction</prop>
+	            <prop key="/pay/wapSms.do">wapSmsNotifyAction</prop>
+	            <prop key="/pay/channelpay.do">specialChannelPayAction</prop>
+	            <prop key="/qudao/queryOrder.do">chnlQueryOrderAction</prop>
+	            <prop key="/qudao/qudaoBill.dl">chnlDayBillAction</prop>
+	            <!-- wap直接支付 -->
+				<prop key="/pay/wap2.do">wapDirectRequestAction</prop>
+				<prop key="/pay/wapDirectCaptcha.do">wapDirectCaptchaAction</prop>
+				<prop key="/pay/wapDirectPay.do">wapDirectPayAction</prop>
+	            <!-- 金山小页面  -->
+				<prop key="/pay/directJin.do">clientPayAction</prop>			
+				<!-- 商户服务 Start -->
+				<prop key="/order/query.do">merQueryOrderAction</prop>
+	            <prop key="/order/query2.do">merQueryOrderTransAction</prop>
+	            <prop key="/sms/push.do">merPushSmsV2Action</prop>
+	            <prop key="/hfuser/query.do">merQueryUserAction</prop>
+	            <prop key="/hfuser/queryBalance.do">merQueryBalanceAction</prop>
+	            <prop key="/hfuser/queryPayment.do">merQueryPaymentAction</prop>
+	            <prop key="/hfuser/queryMobile.do">merQueryMobileAction</prop>
+	            <prop key="/hfuser2/cancel.do">merCancelUserV2Action</prop>
+	            <prop key="/hfuser2/query.do">merQueryUserV2Action</prop>
+	            <prop key="/bill/trans.dl">merDayBillAction</prop>
+	            <prop key="/bill/settle.dl">merSettleBillAction</prop>
+	            <prop key="/bill/userCancel.dl">merCancelUserBillAction</prop>
+	            <prop key="/bill2/trans2.dl">merDayTransBillV2Action</prop>
+	            <prop key="/bill2/trans.dl">merDayTradeBillV2Action</prop>
+	            <prop key="/bill2/charge.dl">merDayChargeBillV2Action</prop>
+	            <prop key="/bill2/userReg.dl">merUserRegBillV2Action</prop>
+	            <prop key="/bill/undotrans.dl">merDayUndoBillAction</prop>
+	            <!-- 商户服务 End -->
+	            
+	            <!-- 商户渠道管理 刷新缓存接口 -->
+	            <prop key="/hfmerrefer/refreshReferCache.do">referCacheRefreshAction</prop>
+	            <!-- 直接支付-->
+	            <prop key="/pay/directPay.do">channelPayAction</prop>
+	            <!-- 直接冲正-->
+	            <prop key="/pay/directRevoke.do">channelRevokeAction</prop>
+
+				<prop key="/pay/kfkReq.do">kfkOrderReqAction</prop>
+				<prop key="/pay/kfkPayNotify.do">kfkPayNotifyAction</prop>
+				 <!-- 预授权支付-->
+				<prop key="/preauth/preAuth.do">preAuthPayAction</prop>
+				 <!-- 发送二次确认支付短信-->
+				<prop key="/mer/reqsms.do">merReqSmsAction</prop>
+				<!--  -->
+				<prop key="/wx/wxUserReply.do">wxUserReplyAction</prop>
+				<prop key="/wx/wxUserInfo.do">wxQueryUserInfAction</prop>
+				<prop key="/wx/wxRandomVerify.do">wxRandomKeyVerifyAction</prop>
+				<prop key="/wx/wxMwUserLtd.do">wxMwUserLtdAction</prop>
+				
+				<!-- wap验证码支付  -->
+				<prop key="/wap/wapPage.do">wapVerifyCodeRequestAction</prop>
+				<prop key="/wap/wapVerifyCode.do">wapVerifyCodeAction</prop>
+				<prop key="/wap/wapVerifyCodePay.do">wapVerifyCodePayAction</prop>
+				
+				<!-- R4验证码支付 -->
+				<prop key="/wx/verifyCode.do">wxVerifyCodeAction</prop>
+				<prop key="/wx/verifyPay.do">wxVerifyPayAction</prop>
+				<!-- 12580 SDK客服端支付 -->
+				<prop key="/wx/wxSDKOrder.do">wxSDKOrderAction</prop>
+	            <prop key="/wx/wxSDKBindInf.do">wxSDKBindInfAction</prop>
+	            <prop key="/wx/wxSDKpay.do">wxSDKpayAction</prop>
+	            <prop key="/wx/clientUser.do">clientUserAction</prop>
+	            <prop key="/wx/wxOrder.do">wxR4OrderAction</prop>
+	            <prop key="/wx/r8xd.do">r8OrderAction</prop>
+	            <prop key="/wx/r8pay.do">r8PayAction</prop>
+ 	            
+ 	            <!-- 短信API下单-->
+	            <prop key="/pay/smsAPIOrder.do">smsAPIOrderAction</prop>
+	              <!-- 话付宝扫码下单-->
+	            <prop key="/wx/wxQRcodeOrder.do">wxQRcodeOrderAction</prop>
+	            
+	            <prop key="/pay/qRcodeOrder.do">qRcodeOrderAction</prop>
+	            
+	            <!-- 渠道验证码下单-->
+	            <prop key="/pay/qdVerifyOrder.do">qdVerifyOrderAction</prop>
+	            <!-- 渠道验证码支付-->
+	            <prop key="/pay/qdVerifyPay.do">qdVerifyPayAction</prop>
+	            <!-- 离线扫码  wap验证码支付 -->
+				<prop key="/pay/h5VerifyCodeRequest.do">H5VerifyCodeRequestAction</prop>
+				<prop key="/pay/H5VerifyCode.do">H5VerifyCodeAction</prop>
+				<prop key="/pay/H5VerifyCodePay.do">H5VerifyCodePayAction</prop>
+	            
+	            
+            </props>
+
+        </property>
+    </bean>
+
+</beans>

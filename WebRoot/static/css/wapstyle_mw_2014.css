@@ -1,0 +1,70 @@
+@charset "utf-8";
+/* CSS Document */
+body{ font-size:16px; margin:0px auto; padding:0px; width:100%; height:auto; background-color:#ffffff; font-family:"微软雅黑";}
+.round { border-radius: 6px; border-color:#c0c0c;}
+a{ text-decoration:none;} 
+.top_logo{ width:100%; height:75px; text-align:left; }
+.top_logo img{ margin:12px 0px 0px 6px;}
+
+.ctn_txt{ width:100%; height:auto;  background-color:#fbf9f9; border:1px solid #e2e2e2; margin:0px 0px 20px 0px; padding:0px;}
+.ctn_title{ width:100%; margin:0px auto; padding:0px; text-align:center; height:65px; line-height:65px; font-size:22px;}
+
+.ctn_nr{ font-size:18px; margin:0px 20px 30px 20px; padding:0px;  color:#2a2a2a;}
+
+.ctn_nr dt{ margin:0px 0px 10px 0px;}
+.tel_sty{ width:60%; height:45px; border:1px solid #c0c0c; font-size:14px; color:#868686; font-family:"微软雅黑";}
+.cor_red{ color:#f94110;}
+.font_size{ font-size:18px;}
+
+
+
+.red_btn{ width:96%; height: auto; background-color:#d62280; -webkit-appearance:none; outline:none; font-size:20px; color:#ffffff; display:block; margin: 0px auto; padding:18px 0px; text-align:center;}
+.red_btn:hover{ background-color:#c6056a}
+
+.zs_font{ width:96%; height:auto; margin:0px auto; padding:0px; color:#868686; font-size:16px; line-height:20px;}
+
+.zs_font dt{ margin:0px 0px 5px 0px; padding:0px;}
+
+
+
+/*-----------------------------------------------支付成功------------------------------------------------------------------*/
+.succes_title{ width:100%; margin:20px 0px 0px 0px; padding:0px; text-align:center;  font-size:22px; color:#7ea512;}
+.succes_title span{ height:80px; line-height:80px;  margin:0px 0px 0px 10px; display: inline-block;}
+.suc_img{ margin:20px 0px 0px 0px; absmiddle:middle }
+.ctn_nr2{ font-size:18px; margin:0px 0px 50px 0px; padding:0px;  color:#2a2a2a; text-align: center;  }
+
+.ctn_nr2 dt{ margin:0px 20px 10px 40px; text-align:left;  }
+.ret_back{ font-size:18px; color:#868686; margin:0px 0px 10px 0px; padding:0px; text-align:center;}
+.ret_back span{ color:#f94110;}
+
+
+/*-----------------------------------------------支付失败------------------------------------------------------------------*/
+.dis_title{ width:100%; margin:20px 0px 0px 0px; padding:0px; text-align:center;  font-size:22px; color:#ed684e;}
+.dis_title span{ height:80px; line-height:80px;  margin:0px 0px 0px 10px; display: inline-block;}
+.suc_img{ margin:20px 0px 0px 0px; absmiddle:middle }
+
+
+.btn{ margin:10px 0px 10px 0px; padding:0px;}
+.blue_btn{ width:96%; height: auto; background-color:#b2b2b2; -webkit-appearance:none; outline:none; font-size:20px; color:#ffffff; display:block; margin: 0px auto; padding:18px 0px; text-align:center;}
+.blue_btn:hover{ background-color:#8e8e8e}
+
+.font_btn{ width:96%; height: auto;  font-size:20px; color:#0084de; display:block; margin: 0px auto; padding:14px 0px; text-align:center; text-decoration:underline;}
+
+
+
+/*-----------------------------------------------未查询到支付结果------------------------------------------------------------------*/
+.ctn_nr3{ font-size:18px; margin:30px 10px 30px 0px; padding:0px;  color:#2a2a2a;}
+
+.xh_icon{ width:25px; height:25px; line-height:25px; background-color:#91be16; display: inline-block; text-align:center; margin:0px 10px 0px 0px; color:#ffffff; float:left;}
+
+.ctn_nr3 dt{ margin:0px 0px 5px 20px;  display:inline-block;}
+.round2 { border-radius: 12px; border-color:#c0c0c;}
+
+
+/*------------------------------------------------验证码支付--------------------------------------------*/
+.name_wid{ width:100px; text-align:right; display:inline-block;}
+.yzm_sty{ width:25%; height:39px; border:1px solid #c0c0c; font-size:14px; color:#868686; font-family:"微软雅黑";}
+.yzm_btn{ width:auto;  height:45px; line-height:45px; text-align:center; -webkit-appearance:none; outline:none; border:1px solid #c0c0c0; display:inline-block; background-color:#e3e3e3; color:#1b1b1b; margin:0px 0px 0px 10px; font-size:16px;}
+.yzm_btn:hover{ background-color:#cecece;}
+.sp_ms{ width:93%; height: auto;  font-size:20px; display:block; margin: 0px auto; border:1px solid #c8c8c8; padding:10px 0px 10px 10px; font-size:18px; color:#868686;}
+

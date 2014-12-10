@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<!--  service start -->
+	<bean id="restService" class="com.umpay.hfweb.service.impl.RestServiceImpl">
+		<property name="messageService" ref="messageService" />
+		<property name="restConnPool" ref="restConnPool" />
+	</bean>
+	<bean id="tradeService" class="com.umpay.hfweb.service.impl.TradeServiceImpl">
+		<property name="messageService" ref="messageService"></property>
+		<property name="tradeConnPool" ref="tradeConnPool" />
+		<property name="smsService" ref="smsService" />
+	</bean>
+	<bean id="messageService" class="com.umpay.hfweb.service.impl.MessageServiceImpl">
+	     <constructor-arg ref="messageSource"/>
+	     <constructor-arg ref="sysconfSource"/>
+	</bean>
+	<bean id="checkService" class="com.umpay.hfweb.service.impl.DefaultCheckServiceImpl">
+		<property name="validateSource" ref="validateSource" />
+	</bean>
+	<bean id="merAuthService" class="com.umpay.hfweb.service.impl.MerAuthServiceImpl">
+		<property name="sysconfSource" ref="sysconfSource" />
+	</bean>
+	<bean id="smsService" class="com.umpay.hfweb.service.impl.SmsServiceImpl">
+		<property name="messageService" ref="messageService" />
+		<property name="smsQueue" ref="smsQueue" />
+		<property name="alarmQueue" ref="alarmQueue" />
+	</bean>
+	<!--  service end -->
+	
+	<!--  action start -->
+    <bean id="abstractAction" class="com.umpay.hfweb.action.BaseAbstractAction" abstract="true">
+		<property name="restService" ref="restService" />
+		<property name="tradeService" ref="tradeService" />
+		<property name="messageService" ref="messageService" />
+		<property name="checkService" ref="checkService" />
+		<property name="merAuthService" ref="merAuthService" />
+		<property name="smsService" ref="smsService" />
+		<property name="mpspLogHandler" ref="loggerHandler" />
+	</bean>
+	
+	<!-- 直连下单 Start -->
+    <bean id="directPayAction" class="com.umpay.hfweb.action.order.DirectPayAction" parent="abstractAction">
+    </bean>
+    <bean id="directPayPerV2Action" class="com.umpay.hfweb.action.order.DirectPayPerV2Action" parent="abstractAction">
+    </bean>
+    <bean id="directPayMonthV2Action" class="com.umpay.hfweb.action.order.DirectPayMonthV2Action" parent="abstractAction">
+    </bean>
+    <bean id="directPayPerXEV2Action" class="com.umpay.hfweb.action.order.DirectPayPerXEV2Action" parent="abstractAction">
+    </bean>
+    <!-- 直连下单 End -->
+       <!--海南基地彩票下单 start -->
+     <bean id="hncpPayAction" class="com.umpay.hfweb.action.order.HncpPayAction" parent="abstractAction">
+    </bean>
+    <!-- 海南基地彩票下单 end -->
+    
+   	<!-- 页面下单 Start -->
+    <bean id="pageReqNoMblAction" class="com.umpay.hfweb.action.order.PageReqNoMblAction" parent="abstractAction">
+		<property name="validateSource" ref="validateSource" />
+    </bean>
+    <bean id="pageRequestAction" class="com.umpay.hfweb.action.order.PageRequestAction" parent="abstractAction">
+    	<property name="validateSource" ref="validateSource" />
+    </bean>
+    <bean id="pageOrderAction" class="com.umpay.hfweb.action.order.PageOrderAction" parent="abstractAction">
+    </bean>
+    <bean id="pagePayNotifyAction" class="com.umpay.hfweb.action.order.PagePayNotifyAction" parent="abstractAction">
+    </bean>
+    <bean id="pageSmsNotifyAction" class="com.umpay.hfweb.action.order.PageSmsNotifyAction" parent="abstractAction">
+	</bean>
+    <bean id="qRCodePayNotifyAction" class="com.umpay.hfweb.action.order.QRCodePayNotifyAction" parent="abstractAction">
+    </bean>
+	<bean id="wapRequestAction" class="com.umpay.hfweb.action.order.WapRequestAction" parent="abstractAction">
+	</bean>
+	<bean id="wapOrderAction" class="com.umpay.hfweb.action.order.WapOrderAction" parent="abstractAction">
+	</bean>
+	<bean id="wapPayNotifyAction" class="com.umpay.hfweb.action.order.WapPayNotifyAction" parent="abstractAction">
+	</bean>
+	<bean id="wapSmsNotifyAction" class="com.umpay.hfweb.action.order.WapSmsNotifyAction" parent="abstractAction">
+	</bean>
+	<bean id="clientPayAction" class="com.umpay.hfweb.action.order.ClientPayAction" parent="abstractAction">
+	</bean>
+	<!-- 页面下单 End -->
+	
+	<!-- 商户自服务 Start -->
+    <bean id="merCancelUserV2Action" class="com.umpay.hfweb.action.mer.MerCancelUserV2Action" parent="abstractAction">
+    </bean>
+    <bean id="merQueryUserAction" class="com.umpay.hfweb.action.mer.MerQueryUserAction" parent="abstractAction">
+    </bean>
+	<bean id="merQueryMobileAction" class="com.umpay.hfweb.action.mer.MerQueryMobileAction" parent="abstractAction">
+	</bean>
+    <bean id="merQueryBalanceAction" class="com.umpay.hfweb.action.mer.MerQueryBalanceAction" parent="abstractAction">
+    </bean>
+    <bean id="merQueryOrderAction" class="com.umpay.hfweb.action.mer.MerQueryOrderAction" parent="abstractAction">
+    </bean>
+    <bean id="merQueryOrderTransAction" class="com.umpay.hfweb.action.mer.MerQueryOrderTransAction" parent="abstractAction">
+    </bean>
+    <bean id="merQueryUserV2Action" class="com.umpay.hfweb.action.mer.MerQueryUserV2Action" parent="abstractAction">
+    </bean>
+    <bean id="merPushSmsV2Action" class="com.umpay.hfweb.action.mer.MerPushSmsV2Action" parent="abstractAction">
+    </bean>
+    <bean id="merQueryPaymentAction" class="com.umpay.hfweb.action.mer.MerQueryPaymentAction" parent="abstractAction">
+    </bean>
+    
+
+
+	<!-- 对账文件下载 -->
+	<bean id="merDayBillAction" class="com.umpay.hfweb.action.mer.bill.MerDayBillAction" parent="abstractAction">
+    </bean>
+    <bean id="merSettleBillAction" class="com.umpay.hfweb.action.mer.bill.MerSettleBillAction" parent="abstractAction">
+    </bean>
+     <bean id="merDayTransBillV2Action" class="com.umpay.hfweb.action.mer.bill.MerDayTransBillV2Action" parent="abstractAction">
+    </bean>
+     <bean id="merDayTradeBillV2Action" class="com.umpay.hfweb.action.mer.bill.MerDayTradeBillV2Action" parent="abstractAction">
+    </bean>
+     <bean id="merDayChargeBillV2Action" class="com.umpay.hfweb.action.mer.bill.MerDayChargeBillV2Action" parent="abstractAction">
+    </bean>
+    <bean id="merUserRegBillV2Action" class="com.umpay.hfweb.action.mer.bill.MerUserRegBillV2Action" parent="abstractAction">
+    </bean>
+    <bean id="merCancelUserBillAction" class="com.umpay.hfweb.action.mer.bill.MerCancelUserBillAction" parent="abstractAction">
+    </bean>
+     <bean id="merDayUndoBillAction" class="com.umpay.hfweb.action.mer.bill.MerDayUndoBillAction" parent="abstractAction">
+    </bean>
+    <!-- 商户自服务 End -->
+    
+    <!--报备信息 刷新缓存 Start -->
+    <bean id="referCacheRefreshAction" class="com.umpay.hfweb.action.order.ReferCacheRefreshAction" parent="abstractAction">
+    </bean>
+	<!--报备信息 end -->
+	
+	<!-- 无线接入Start -->
+	<!-- 无线接入商户下单 -->
+	<bean id="wxOrderAction" class="com.umpay.hfweb.action.wx.WxOrderAction" parent="abstractAction"></bean>
+	<!-- 无线接入下临时订单 -->
+	<bean id="wxSavePlatOrderAction" class="com.umpay.hfweb.action.wx.WxHfSavePlatOrderAction" parent="abstractAction"></bean>
+	<!-- 无线接入查询临时订单 -->
+	<bean id="wxQueryPlatOrderAction" class="com.umpay.hfweb.action.wx.WxHfQueryPlatOrderAction" parent="abstractAction"></bean>
+	<!-- 无线接入商户查询订单 -->
+	<bean id="wxQueryOrderAction" class="com.umpay.hfweb.action.wx.WxQueryOrderAction" parent="abstractAction"></bean>
+	<!-- 无线接入商户检查客户端版本更新 -->
+	<bean id="wxUpdateVersionAction" class="com.umpay.hfweb.action.wx.WxUpdateVersionAction" parent="abstractAction"></bean>
+	<!-- 无线用户信息 -->
+	<bean id="wxUserAction" class="com.umpay.hfweb.action.wx.WxUserAction" parent="abstractAction"></bean>
+	<!-- 无线接入End -->
+	<bean id="wxHfOrderAction" class="com.umpay.hfweb.action.wx.WxHfOrderAction" parent="abstractAction"></bean>
+	<bean id="wxSmsAction" class="com.umpay.hfweb.action.wx.WxSmsAction" parent="abstractAction"></bean>
+		<!-- 话付宝U付支付 -->
+	<bean id="wxUfAction" class="com.umpay.hfweb.action.wx.WxUFAction" parent="abstractAction"></bean>
+	<!-- 话付宝U付支付商户结果通知 -->
+	<bean id="wxUFNotifyAction" class="com.umpay.hfweb.action.wx.WxUFNotifyAction" parent="abstractAction"></bean>
+	<bean id="wxSmsVerifyAction" class="com.umpay.hfweb.action.wx.WxSmsRandomKeyAction" parent="abstractAction"></bean>
+	<bean id="wxHistoryTransAction" class="com.umpay.hfweb.action.wx.WxHistoryTransAction" parent="abstractAction"></bean>
+	
+	<!-- 直接支付 Start-->
+	<bean id="channelPayAction" class="com.umpay.hfweb.action.pay.ChannelPayAction" parent="abstractAction"></bean>
+	<bean id="channelRevokeAction" class="com.umpay.hfweb.action.pay.ChannelRevokeAction" parent="abstractAction"></bean>
+    <!-- 直接支付 End-->
+    
+    <bean id="kfkOrderReqAction" class="com.umpay.hfweb.action.order.KFKOrderRequestAction" parent="abstractAction"></bean>
+    <bean id="kfkPayNotifyAction" class="com.umpay.hfweb.action.order.KFKPayNotifyAction" parent="abstractAction"></bean>
+    <!-- 预授权商户支付请求 -->
+     <bean id="preAuthPayAction" class="com.umpay.hfweb.action.preauth.PreAuthPayAction" parent="abstractAction"></bean>
+     <bean id="specialChannelPayAction" class="com.umpay.hfweb.action.pay.SpecialChannelPayAction" parent="abstractAction"/>
+     <bean id="chnlOrderAction" class="com.umpay.hfweb.action.order.ChnlOrderAction" parent="abstractAction"/>
+     <bean id="chnlQueryOrderAction" class="com.umpay.hfweb.action.qudao.ChnlQueryOrderAction" parent="abstractAction"/>
+       <!-- 商户请求重发确认支付短信 -->
+     <bean id="merReqSmsAction" class="com.umpay.hfweb.action.mer.MerReqSmsAction" parent="abstractAction"/>
+     <bean id="wxUserReplyAction" class="com.umpay.hfweb.action.wx.WxUserReplyAction" parent="abstractAction"/>
+     <bean id="wxQueryUserInfAction" class="com.umpay.hfweb.action.wx.WxQueryUserInfAction" parent="abstractAction"/>
+    <bean id="wxRandomKeyVerifyAction" class="com.umpay.hfweb.action.wx.WxRandomKeyVerifyAction" parent="abstractAction"/>
+     <bean id="chnlDayBillAction" class="com.umpay.hfweb.action.qudao.ChnlDayBillAction" parent="abstractAction"/>
+     <!-- wap直接支付-->
+    <bean id="wapDirectRequestAction" class="com.umpay.hfweb.action.order.WapDirectRequestAction" parent="abstractAction"></bean>
+    <bean id="wapDirectCaptchaAction" class="com.umpay.hfweb.action.order.WapDirectCaptchaAction" parent="abstractAction"></bean>
+	<bean id="wapDirectPayAction" class="com.umpay.hfweb.action.pay.WapDirectPayAction" parent="abstractAction"></bean>
+	
+	<!--  wap直接支付（通用） -->
+	<bean id="wapVerifyCodeRequestAction" class="com.umpay.hfweb.action.wap.WapVerifyCodeRequestAction" parent="abstractAction"></bean>
+    <bean id="wapVerifyCodeAction" class="com.umpay.hfweb.action.wap.WapVerifyCodeAction" parent="abstractAction"></bean>
+	<bean id="wapVerifyCodePayAction" class="com.umpay.hfweb.action.wap.WapVerifyCodePayAction" parent="abstractAction"></bean>
+	
+	<!-- R4验证码支付流程 -->
+    <bean id="wxVerifyCodeAction" class="com.umpay.hfweb.action.wx.WxVerifyRequestAction" parent="abstractAction"></bean>
+	<bean id="wxVerifyPayAction" class="com.umpay.hfweb.action.wx.WxVerifyPayAction" parent="abstractAction"></bean>
+
+    <!--  12580无线SDK客户端支付流程 -->
+	<bean id="wxSDKOrderAction" class="com.umpay.hfweb.action.wx.WxSDKOrderAction" parent="abstractAction"></bean>
+    <bean id="wxSDKBindInfAction" class="com.umpay.hfweb.action.wx.WxSDKBindInfAction" parent="abstractAction"></bean>
+	<bean id="wxSDKpayAction" class="com.umpay.hfweb.action.wx.WxSDKPayAction" parent="abstractAction"></bean>
+	<bean id="clientUserAction" class="com.umpay.hfweb.action.wx.ClientUserAction" parent="abstractAction"></bean>
+	<bean id="wxR4OrderAction" class="com.umpay.hfweb.action.wx.WxR4OrderAction" parent="abstractAction"></bean>
+	<bean id="r8OrderAction" class="com.umpay.hfweb.action.order.R8OrderAction" parent="abstractAction"></bean>
+	<bean id="r8PayAction" class="com.umpay.hfweb.action.wx.R8PayAction" parent="abstractAction"></bean>
+	
+	<!-- 短信api支付 Start-->
+	<bean id="smsAPIOrderAction" class="com.umpay.hfweb.action.order.SmsAPIOrderAction" parent="abstractAction"></bean>
+    <!-- 短信api支付 End-->
+    
+    <!-- 用户全网交易累计信息 -->
+	<bean id="wxMwUserLtdAction" class="com.umpay.hfweb.action.wx.WxMwUserLtdAction" parent="abstractAction"></bean>
+	<!-- 话付宝扫码下单 -->
+	<bean id="wxQRcodeOrderAction" class="com.umpay.hfweb.action.wx.WxQRcodeOrderAction" parent="abstractAction"></bean>
+	<!-- 话付宝扫码下单新接口，post方式请求 -->
+	<bean id="qRcodeOrderAction" class="com.umpay.hfweb.action.order.QRcodeOrderAction" parent="abstractAction"></bean>
+    <!-- 渠道验证码下单 -->
+    <bean id="qdVerifyOrderAction" class="com.umpay.hfweb.action.order.ChnlVerifyOrderAction" parent="abstractAction"></bean>
+    <!-- 渠道验证码支付 -->
+    <bean id="qdVerifyPayAction" class="com.umpay.hfweb.action.order.ChnlVerifyPayAction" parent="abstractAction"></bean>
+
+    <!-- 离线扫码-验证码支付流程 -->
+    <bean id="H5VerifyCodeRequestAction" class="com.umpay.hfweb.action.order.H5VerifyCodeRequestAction" parent="abstractAction"></bean>
+    <bean id="H5VerifyCodeAction" class="com.umpay.hfweb.action.order.H5VerifyCodeAction" parent="abstractAction"></bean>
+    <bean id="H5VerifyCodePayAction" class="com.umpay.hfweb.action.order.H5VerifyCodePayAction" parent="abstractAction"></bean>
+</beans>

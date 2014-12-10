@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-3.0.xsd  
+            http://www.springframework.org/schema/context
+            http://www.springframework.org/schema/context/spring-context-3.0.xsd
+            http://www.springframework.org/schema/mvc      
+          	http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+    <!-- 自动搜索@Controller标注的类
+	<context:component-scan base-package="com.umpay.uniform.webapp" />
+	<bean class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping" />
+	 -->
+	 
+	<!--Definition of View Resolver -->
+    <bean id="viewResolver" 
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="viewClass">
+            <value>org.springframework.web.servlet.view.JstlView</value>
+        </property>
+        <property name="prefix"><value>/WEB-INF/page/</value></property>
+        <property name="suffix"><value>.jsp</value></property>
+        <property name="contentType">
+			<value>text/html;charset=UTF-8</value>
+		</property>
+    </bean>
+ 
+<!-- Exception -->
+    <bean id="exceptionResolver"
+	    class="com.umpay.hfweb.exception.resolver.WebExceptionResolver">
+	    <property name="messageService" ref="messageService" />
+    	<property name="defaultErrorView"><value>web_error</value></property>
+    	<property name="exceptionMappings">
+    		<props>
+    			<prop key="java.sql.SQLException">web_error</prop>
+    			<prop key="java.lang.RuntimeException">web_error</prop>
+    		</props>
+    	</property>
+    </bean>
+        
+    <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean">
+        <property name="configLocation">
+            <value>classpath:ehcache.xml</value>
+        </property>
+    </bean>
+    <!--  获取Spring Application上下文-->
+    <bean id="SpringContextUtil" class="com.umpay.hfweb.util.SpringContextUtil "/>
+    
+    <!-- logger config start -->
+	<bean id="loggerHandler"  class="com.umpay.hfweb.common.LogTemplateHandler" >
+		<property name="temp">  
+            <value>rpid,merId,merDate,mobileId,goodsId,funCode,amount,orderId,provcode,areacode,bankid,retCode,retMsg,clientIp,referer,useTime</value>
+        </property>
+	</bean>
+    <!-- check param start -->
+    <bean id="validateSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list><value>classpath:check/validate</value></list>
+        </property>
+        <property name="cacheSeconds"><value>3600</value></property>
+    </bean>
+    <!-- check param end -->
+   <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list><value>classpath:message</value></list>
+        </property>
+        <property name="cacheSeconds"><value>3600</value></property>
+   </bean>
+   <bean id="sysconfSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="basenames">
+            <list>
+            	<value>classpath:sysconf</value>
+            	<value>classpath:merconf</value>
+            	<value>classpath:urlfilter</value>
+            </list>
+        </property>
+        <property name="cacheSeconds"><value>1800</value></property>
+   </bean>
+   <bean id="clientCtrl4Rest" class="com.umpay.hfweb.common.HttpClientControler" destroy-method="destory">
+   		<constructor-arg index="0"><value>100</value></constructor-arg>
+        <constructor-arg index="1"><value>30000</value></constructor-arg>
+   </bean>
+   <bean id="clientCtrl4Trade" class="com.umpay.hfweb.common.HttpClientControler" destroy-method="destory">
+   		<constructor-arg index="0"><value>100</value></constructor-arg>
+        <constructor-arg index="1"><value>75000</value></constructor-arg>
+   </bean>
+   <bean id="clientCtrl4Sms" class="com.umpay.hfweb.common.HttpClientControler" destroy-method="destory">
+      	<constructor-arg index="0"><value>10</value></constructor-arg>
+        <constructor-arg index="1"><value>60000</value></constructor-arg>
+   </bean>
+   <bean id="clientCtrl4Alarm" class="com.umpay.hfweb.common.HttpClientControler" destroy-method="destory">
+      	<constructor-arg index="0"><value>10</value></constructor-arg>
+        <constructor-arg index="1"><value>60000</value></constructor-arg>
+   </bean>
+   <bean id="restConnPool" class="com.umpay.hfweb.common.RestConnPool">
+         <constructor-arg type="int">   
+			<value>1000</value>   
+		 </constructor-arg>
+		 <constructor-arg ref="clientCtrl4Rest"/>
+		<property name="loadStrategy" ref="loadStrategy_rest" />
+   	</bean>
+   	<bean id="tradeConnPool" class="com.umpay.hfweb.common.TradeConnPool">
+         <constructor-arg type="int">   
+			<value>1000</value>   
+		 </constructor-arg>
+		 <constructor-arg ref="clientCtrl4Trade"/>
+		 <property name="loadStrategy" ref="loadStrategy_trade" />
+   	</bean>
+   	<!--  sms queue config start-->
+   	<bean id="beancreator" class="com.bs2.core.ext.BeanCreator0"/>
+   	<bean id="threadpool4service" class="com.bs2.core.ext.ThreadPoolGroup">
+         <constructor-arg index="0"><value>MTTask</value></constructor-arg>
+         <constructor-arg index="1"><value>1</value></constructor-arg>
+         <constructor-arg index="2"><value>10</value></constructor-arg>
+         <property name="idleTimeout"><value>60000</value></property>
+         <property name="_threadgroup" ref="threadgroup4service" />
+    </bean>
+    <bean id="threadgroup4service" class="com.bs2.core.ext.ServiceThreadGroup">
+          <description>
+                com.bs2.core.ext.ServiceThreadGroup,remember the exception
+                java.lang.ThreadGroup:
+                - Ignoring constructor [public java.lang.ThreadGroup(java.lang.ThreadGroup,java.lang.String)] of bean 'threadgroup4service': could not satisfy dependencies
+                - Ignoring constructor [private java.lang.ThreadGroup()] of bean 'threadgroup4service': could not satisfy dependencies
+         </description>
+         <constructor-arg index="0"><value>threadgroup4service</value></constructor-arg>
+    </bean>
+    <bean id="smsQueue" class="com.bs2.core.ext.Service4QObj">
+          <description>SMS Queue Service</description>
+            <property name="_dependences">
+                <map>
+                   <entry key="m_beancreator"><ref bean="beancreator"/></entry>
+                   <entry key="m_threadgroup"><ref bean="threadgroup4service"/></entry>
+                   <entry key="m_threadpool"><ref bean="threadpool4service"/></entry>
+                   <entry key="m_classname"><value>com.umpay.hfweb.util.SmsInfoSender</value></entry>
+                </map>
+            </property>
+            <property name="_properties">
+                <props>
+                   <prop key="NAME">QObj</prop>
+                </props>
+            </property>
+    </bean>
+   	<!--  sms queue config end-->
+   	
+   	<!--  alarm queue config start-->
+   	<bean id="alarmBeancreator" class="com.bs2.core.ext.BeanCreator0"/>
+   	<bean id="alarmThreadpool4service" class="com.bs2.core.ext.ThreadPoolGroup">
+         <constructor-arg index="0"><value>ALARMTask</value></constructor-arg>
+         <constructor-arg index="1"><value>1</value></constructor-arg>
+         <constructor-arg index="2"><value>10</value></constructor-arg>
+         <property name="idleTimeout"><value>60000</value></property>
+         <property name="_threadgroup" ref="alarmThreadgroup4service" />
+    </bean>
+    <bean id="alarmThreadgroup4service" class="com.bs2.core.ext.ServiceThreadGroup">
+          <description>
+                com.bs2.core.ext.ServiceThreadGroup,remember the exception
+                java.lang.ThreadGroup:
+                - Ignoring constructor [public java.lang.ThreadGroup(java.lang.ThreadGroup,java.lang.String)] of bean 'threadgroup4service': could not satisfy dependencies
+                - Ignoring constructor [private java.lang.ThreadGroup()] of bean 'threadgroup4service': could not satisfy dependencies
+         </description>
+         <constructor-arg index="0"><value>alarmThreadpool4service</value></constructor-arg>
+    </bean>
+    <bean id="alarmQueue" class="com.bs2.core.ext.Service4QObj">
+          <description>Alarm Queue Service</description>
+            <property name="_dependences">
+                <map>
+                   <entry key="m_beancreator"><ref bean="alarmBeancreator"/></entry>
+                   <entry key="m_threadgroup"><ref bean="alarmThreadgroup4service"/></entry>
+                   <entry key="m_threadpool"><ref bean="alarmThreadpool4service"/></entry>
+                   <entry key="m_classname"><value>com.umpay.hfweb.util.AlarmInfoSender</value></entry>
+                </map>
+            </property>
+            <property name="_properties">
+                <props>
+                   <prop key="NAME">QAObj</prop>
+                </props>
+            </property>
+    </bean>
+   	<!--  alarm queue config end-->
+   	
+   	 <!--  load strategy config start-->
+	<bean id="loadStrategy_rest" class="com.umpay.loadstrategy.LeastConnectionStrategy">
+		<property name="rsi" ref="rebackStrategy_rest" />
+		<property name="exCode" value="9999,"></property>
+	</bean>
+	<bean id="rebackStrategy_rest" class="com.umpay.loadstrategy.reback.RebackReqTimeStrategy">
+		<property name="sysId" value="8600"></property>
+		<property name="maxUrlLostNum" value="3"></property>
+		<property name="urlLostTime" value="15000"></property>
+	</bean>
+	
+	<bean id="loadStrategy_trade" class="com.umpay.loadstrategy.LeastConnectionStrategy">
+		<property name="rsi" ref="rebackStrategy_trade" />
+		<property name="exCode" value="9999,"></property>
+	</bean>
+	<bean id="rebackStrategy_trade" class="com.umpay.loadstrategy.reback.RebackReqTimeStrategy">
+		<property name="sysId" value="8601"></property>
+		<property name="maxUrlLostNum" value="3"></property>
+		<property name="urlLostTime" value="15000"></property>
+	</bean>
+	
+	<bean id="loadStrategy_sms" class="com.umpay.loadstrategy.LeastConnectionStrategy">
+		<property name="rsi" ref="rebackStrategy_sms" />
+		<property name="exCode" value="9999,"></property>
+	</bean>
+	<bean id="rebackStrategy_sms" class="com.umpay.loadstrategy.reback.RebackReqTimeStrategy">
+		<property name="sysId" value="8604"></property>
+		<property name="maxUrlLostNum" value="3"></property>
+		<property name="urlLostTime" value="15000"></property>
+	</bean>
+	
+	<bean id="loadStrategy_alarm" class="com.umpay.loadstrategy.LeastConnectionStrategy">
+		<property name="rsi" ref="rebackStrategy_alarm" />
+		<property name="exCode" value="9999,"></property>
+	</bean>
+	<bean id="rebackStrategy_alarm" class="com.umpay.loadstrategy.reback.RebackReqTimeStrategy">
+		<property name="sysId" value="8605"></property>
+		<property name="maxUrlLostNum" value="3"></property>
+		<property name="urlLostTime" value="15000"></property>
+	</bean>
+	
+	<bean id="configSpier" class="com.umpay.loadstrategy.configspy.ConfigSpier" init-method="start">
+		<property name="changeHandler" ref="configHandler"></property>
+		<property name="configFileName" value="/usr/mpsp/hfLoadStrategy/conf.properties"></property>
+	</bean>
+	<bean id="configHandler" class="com.umpay.loadstrategy.configspy.ConfigHandler"></bean>
+	<!--  load strategy config end-->
+</beans>

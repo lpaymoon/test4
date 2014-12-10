@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- For assistance related to logback-translator or configuration  -->
+<!-- files in general, please contact the logback user mailing list -->
+<!-- at http://www.qos.ch/mailman/listinfo/logback-user             -->
+<!--                                                                -->
+<!-- For professional support please see                            -->
+<!--    http://www.qos.ch/shop/products/professionalSupport         -->
+<!--                                                                -->
+<configuration scan="true" scanPeriod="6 seconds">
+  <appender name="uniformMpspLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+    <!--for further documentation-->
+    <File>log/mpsp_hfweb.log</File>
+    <encoder>
+      <pattern>%d{yyyyMMddHHmmss},%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>log/mpsp_hfweb.log.%d{yyyyMMddHH}</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="hfLoadStrategy" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+    <!--for further documentation-->
+    <File>log/hfLoadStrategy.log</File>
+    <encoder>
+      <pattern>%d{yyyyMMddHHmmss},%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>log/hfLoadStrategy.log.%d{yyyyMMddHH}</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="HFMERREFER" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+    <!--for further documentation-->
+    <File>log/hfMerRefer.log</File>
+    <encoder>
+      <pattern>%d{yyyyMMdd},%d{HHmmss},%m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>log/hfMerRefer.log.%d{yyyyMMddHH}</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+      <pattern>%d{yyyyMMddHHmmss} [%t] %-5p %c{0} - %m%n</pattern>
+    </encoder>
+  </appender>
+  <appender name="hfwebDetail" class="ch.qos.logback.core.rolling.RollingFileAppender">
+    <!--See http://logback.qos.ch/manual/appenders.html#RollingFileAppender-->
+    <!--and http://logback.qos.ch/manual/appenders.html#TimeBasedRollingPolicy-->
+    <!--for further documentation-->
+    <File>log/detail_hfweb.log</File>
+    <encoder>
+      <pattern>%d{yyyyMMddHHmmss} [%-9t] %-5p %c{0} - %m%n</pattern>
+    </encoder>
+    <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+      <fileNamePattern>log/detail_hfweb.log.%d{yyyyMMddHH}</fileNamePattern>
+    </rollingPolicy>
+  </appender>
+  <logger name="uniformMpspLog" level="INFO">
+    <appender-ref ref="uniformMpspLog"/>
+  </logger>
+  <logger name="hfLoadStrategy" level="INFO">
+    <appender-ref ref="hfLoadStrategy"/>
+  </logger>
+  <logger name="org" level="ERROR"/>
+  <logger name="HFMERREFER" level="INFO">
+    <appender-ref ref="HFMERREFER"/>
+  </logger>
+  <root level="INFO">
+    <appender-ref ref="CONSOLE"/>
+    <appender-ref ref="hfwebDetail"/>
+  </root>
+</configuration>
